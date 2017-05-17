@@ -1,6 +1,6 @@
 ---
-ref: nibiru-cicd
-name: nibiru-cicd
+ref: nibiru_cicd
+name: nibiru_cicd
 description: Actions and chains for CI/CD Nibiru v3
 version: 0.1.0
 author: ritzbitz01
