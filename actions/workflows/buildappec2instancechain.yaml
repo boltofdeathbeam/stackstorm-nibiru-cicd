@@ -35,7 +35,7 @@
       ref: "consul.put"
       params:
         key: "{{app_ami_name}}-{{pipeline_id}}.instanceip"
-        value: "{{create_ec2_instance.result[1]}}:8080"
+        value: "{{create_ec2_instance.result[1]}}"
       on-success: "set_instance_id_consul"
     -
       name: "set_instance_id_consul"

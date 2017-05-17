@@ -11,5 +11,5 @@
       ref: "nibiru_cicd.execute_maven_integration_tests_action"
       params:
         intscript: "{{intscript}}"
-        instanceip: "{{get_instance_ip_redis.result}}"
+        instanceip: "{{get_instance_ip_redis.result}}:8080"
   default: "get_instance_ip_redis"
