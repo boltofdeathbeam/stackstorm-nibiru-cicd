@@ -1,16 +1,16 @@
 ---
   chain:
     -
-      name: "get_ami_id_redis"
-      ref: "redis.get"
+      name: "get_ami_id_consul"
+      ref: "consul.get"
       params:
-        key: "{{app_ami_name}}-{{pipeline_id}}-amiid"
+        key: "{{ami_app_name}}-{{pipeline_id}}.amiid"
       on-success: "create_ec2_instance"
     -
       name: "create_ec2_instance"
       ref: "aws.create_ec2_instance_action"
       params:
-        image_id: "{{get_ami_id_redis.result}}"
+        image_id: "{{get_ami_id_consul.result}}"
         security_group_id: "{{security_group_id}}"
         instance_type: "{{ instance_type }}"
         key_name: "{{key_name}}"

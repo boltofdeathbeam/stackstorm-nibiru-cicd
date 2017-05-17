@@ -1,0 +1,17 @@
+---
+  chain:
+    -
+      name: "get_instance_ip_redis"
+      ref: "redis.get"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}-instanceip"
+      on-success: "start_java_debian_package"
+    -
+      name: "start_java_debian_package"
+      ref: "aws.start_java_debian_package_action"
+      params:
+        instanceip: "{{get_instance_ip_redis.result}}"
+        packagename: "{{packagename}}"
+        servicename: "{{servicename}}"
+        key_file_name: "{{key_file_name}}"
+  default: "get_instance_ip_redis"
