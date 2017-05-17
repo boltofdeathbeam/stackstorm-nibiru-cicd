@@ -1,14 +1,14 @@
 ---
   chain:
     -
-      name: "get_instance_ip_redis"
-      ref: "redis.get"
+      name: "get_instance_ip_consul"
+      ref: "consul.get"
       params:
-        key: "{{app_ami_name}}-{{pipeline_id}}-instanceip"
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceip"
       on-success: "start_java_debian_package"
     -
       name: "start_java_debian_package"
-      ref: "aws.start_java_debian_package_action"
+      ref: "nibiru_cicd.start_java_debian_package_action"
       params:
         instanceip: "{{get_instance_ip_redis.result}}"
         packagename: "{{packagename}}"

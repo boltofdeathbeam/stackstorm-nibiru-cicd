@@ -8,7 +8,7 @@
       on-success: "create_ec2_instance"
     -
       name: "create_ec2_instance"
-      ref: "aws.create_ec2_instance_action"
+      ref: "nibiru_cicd.create_ec2_instance_action"
       params:
         image_id: "{{get_ami_id_consul.result}}"
         security_group_id: "{{security_group_id}}"

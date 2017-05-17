@@ -2,7 +2,7 @@
   chain:
     -
       name: "get_base_ami"
-      ref: "nibiru-cicd.get_base_ami_action"
+      ref: "nibiru_cicd.get_base_ami_action"
       params:
         os: "{{os_name}}"
       on-success: "packer_build"
@@ -15,7 +15,7 @@
       on-success: "get_app_ami"
     -
       name: "get_app_ami"
-      ref: "nibiru-cicd.get_app_ami_action"
+      ref: "nibiru_cicd.get_app_ami_action"
       params:
         appaminame: "{{ami_app_name}}"
       on-success: "set_ami_id_redis"
