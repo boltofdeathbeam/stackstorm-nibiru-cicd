@@ -1,0 +1,12 @@
+---
+name: "get_app_ami_action"
+runner_type: "python-script"
+description: "Get App AMI for specified AMI name"
+enabled: true
+entry_point: "getappami.py"
+parameters:
+    appaminame:
+        type: "string"
+        description: "Name of App AMI"
+        required: true
+        position: 0

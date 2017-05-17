@@ -1,0 +1,15 @@
+---
+  chain:
+    -
+      name: "get_instance_ip_redis"
+      ref: "redis.get"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}-instanceip"
+      on-success: "execute_maven_integration_tests"
+    -
+      name: "execute_maven_integration_tests"
+      ref: "aws.execute_maven_integration_tests_action"
+      params:
+        intscript: "{{intscript}}"
+        instanceip: "{{get_instance_ip_redis.result}}"
+  default: "get_instance_ip_redis"

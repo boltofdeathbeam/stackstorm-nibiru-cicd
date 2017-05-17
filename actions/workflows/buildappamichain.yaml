@@ -1,0 +1,43 @@
+---
+  chain:
+    -
+      name: "get_base_ami"
+      ref: "nibiru-cicd.get_base_ami_action"
+      params:
+        os: "{{os_name}}"
+      on-success: "packer_build"
+    -
+      name: "packer_build"
+      ref: "packer.build"
+      params:
+        packerfile: "{{packerfile}}"
+        variables: "{'base_ami_id':'{{ get_base_ami.result }}', 'ami_app_name':'{{ami_app_name}}','app_pkg_name':'{{app_package_name_loc}}','pkg_install_loc':'{{ package_install_loc }}', 'ec2_instance_type':'{{ec2_instance_type}}'}"
+      on-success: "get_app_ami"
+    -
+      name: "get_app_ami"
+      ref: "nibiru-cicd.get_app_ami_action"
+      params:
+        appaminame: "{{ami_app_name}}"
+      on-success: "set_ami_id_redis"
+    -
+      name: "set_ami_id_redis"
+      ref: "redis.set"
+      params:
+        key: "{{ami_app_name}}-{{pipeline_id}}-amiid"
+        value: "{{get_app_ami.result}}"
+      on-success: "set_ami_id_consul"
+      on-failure: "deregister_app_ami"
+    -
+      name: "set_ami_id_consul"
+      ref: "consul.put"
+      params:
+        key: "{{ami_app_name}}-{{pipeline_id}}.amiid"
+        value: "{{get_app_ami.result}}"
+      on-failure: "deregister_app_ami"
+    -
+      name: "deregister_app_ami"
+      ref: "aws.ec2_deregister_image"
+      params:
+        amiid: "{{ get_app_ami.result }}"
+
+  default: "get_base_ami"

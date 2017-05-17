@@ -1,0 +1,7 @@
+---
+ref: nibiru-cicd
+name: nibiru-cicd
+description: Actions and chains for CI/CD Nibiru v3
+version: 0.1.0
+author: ritzbitz01
+email: ryan.ritz@pearson.com

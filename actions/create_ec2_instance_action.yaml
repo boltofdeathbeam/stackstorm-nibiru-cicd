@@ -1,0 +1,33 @@
+---
+name: "create_ec2_instance_action"
+runner_type: "python-script"
+description: "Create EC2 Instace based on the application AMI"
+enabled: true
+entry_point: "createec2instance.py"
+parameters:
+    image_id:
+        type: "string"
+        description: "ImageId of App AMI"
+        required: true
+        position: 0
+    security_group_id:
+        type: "string"
+        description: "Security Group Id"
+        required: true
+        position: 1
+    instance_type:
+      type: "string"
+      description: "EC2 Instance Type"
+      required: true
+      position: 2
+    key_name:
+      type: "string"
+      description: "EC2 Key Name"
+      required: true
+      position: 3
+    app_instance_name:
+      type: "string"
+      description: "EC2 Instance Name Tag"
+      required: true
+      position: 4
+      

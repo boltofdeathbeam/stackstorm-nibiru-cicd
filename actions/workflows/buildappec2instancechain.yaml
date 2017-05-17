@@ -1,0 +1,46 @@
+---
+  chain:
+    -
+      name: "get_ami_id_redis"
+      ref: "redis.get"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}-amiid"
+      on-success: "create_ec2_instance"
+    -
+      name: "create_ec2_instance"
+      ref: "aws.create_ec2_instance_action"
+      params:
+        image_id: "{{get_ami_id_redis.result}}"
+        security_group_id: "{{security_group_id}}"
+        instance_type: "{{ instance_type }}"
+        key_name: "{{key_name}}"
+        app_instance_name: "{{app_instance_name}}"
+      on-success: "set_instance_id_redis"
+    -
+      name: "set_instance_id_redis"
+      ref: "redis.set"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}-instanceid"
+        value: "{{create_ec2_instance.result[0]}}"
+      on-success: "set_instance_ip_redis"
+    -
+      name: "set_instance_ip_redis"
+      ref: "redis.set"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}-instanceip"
+        value: "{{create_ec2_instance.result[1]}}"
+      on-success: "set_instance_ip_consul"
+    -
+      name: "set_instance_ip_consul"
+      ref: "consul.put"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceip"
+        value: "{{create_ec2_instance.result[1]}}:8080"
+      on-success: "set_instance_id_consul"
+    -
+      name: "set_instance_id_consul"
+      ref: "consul.put"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceid"
+        value: "{{create_ec2_instance.result[0]}}"
+  default: "get_ami_id_redis"

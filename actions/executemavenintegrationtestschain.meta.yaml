@@ -1,0 +1,20 @@
+---
+
+  name: "executemavenintegrationtestschain"
+  description: "Execute the integration tests through maven on the created EC2 instance"
+
+  runner_type: "action-chain"
+
+  entry_point: "workflows/executemavenintegrationtestschain.yaml"
+
+  enabled: true
+  parameters:
+    app_ami_name:
+      type: "string"
+      required: true
+    intscript:
+      type: "string"
+      required: true
+    pipeline_id:
+      type: "string"
+      required: true

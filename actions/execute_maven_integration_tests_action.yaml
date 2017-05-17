@@ -1,0 +1,17 @@
+---
+name: "execute_maven_integration_tests_action"
+runner_type: "python-script"
+description: "Execute the integration tests through maven on the created EC2 instance"
+enabled: true
+entry_point: "executemavenintegrationtests.py"
+parameters:
+    intscript:
+        type: "string"
+        description: "Script to kick off integration tests"
+        required: true
+        position: 0
+    instanceip:
+        type: "string"
+        description: "IP address of the EC2 instance"
+        required: true
+        position: 1

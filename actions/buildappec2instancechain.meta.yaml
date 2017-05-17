@@ -1,0 +1,29 @@
+---
+
+  name: "buildappec2instancechain"
+  description: "Build App EC2 Instance Chain"
+
+  runner_type: "action-chain"
+
+  entry_point: "workflows/buildappec2instancechain.yaml"
+
+  enabled: true
+  parameters:
+    app_ami_name:
+      type: "string"
+      required: true
+    security_group_id:
+      type: "string"
+      required: true
+    instance_type:
+      type: "string"
+      default: t2.medium
+    key_name:
+      type: "string"
+      required: true
+    app_instance_name:
+      type: "string"
+      required: true
+    pipeline_id:
+      type: "string"
+      required: true

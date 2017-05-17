@@ -1,0 +1,26 @@
+---
+
+  name: "startjavadebianpackagechain"
+  description: "Start the Java service from the installed debian package"
+
+  runner_type: "action-chain"
+
+  entry_point: "workflows/startjavadebianpackagechain.yaml"
+
+  enabled: true
+  parameters:
+    app_ami_name:
+      type: "string"
+      required: true
+    pipeline_id:
+      type: "string"
+      required: true
+    packagename:
+      type: "string"
+      required: true
+    servicename:
+      type: "string"
+      required: true
+    key_file_name:
+      type: "string"
+      required: true

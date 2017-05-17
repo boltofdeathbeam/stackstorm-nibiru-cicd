@@ -1,0 +1,12 @@
+---
+name: "get_base_ami_action"
+runner_type: "python-script"
+description: "Get Base AMI for specified OS"
+enabled: true
+entry_point: "getbaseami.py"
+parameters:
+    os:
+        type: "string"
+        description: "OS for AMI"
+        required: true
+        position: 0
