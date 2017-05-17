@@ -9,6 +9,8 @@ class CreateEC2InstanceAction(Action):
         ec2 = boto3.resource('ec2')
         client = boto3.client('ec2')
 
+        print('IMAGE ID: ' + image_id)
+
         instances = ec2.create_instances(ImageId=image_id, MinCount=1, MaxCount=1, SecurityGroupIds=[security_group_id], InstanceType=instance_type, KeyName=key_name)
 
         appInstanceId = instances[0].id

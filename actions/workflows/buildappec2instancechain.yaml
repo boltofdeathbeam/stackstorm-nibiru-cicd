@@ -10,7 +10,7 @@
       name: "create_ec2_instance"
       ref: "nibiru_cicd.create_ec2_instance_action"
       params:
-        image_id: "{{get_ami_id_consul.result}}"
+        image_id: "{{get_ami_id_consul.result.Value}}"
         security_group_id: "{{security_group_id}}"
         instance_type: "{{ instance_type }}"
         key_name: "{{key_name}}"
