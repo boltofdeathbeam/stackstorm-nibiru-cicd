@@ -11,7 +11,7 @@
       ref: "packer.build"
       params:
         packerfile: "{{packerfile}}"
-        variables: "{'base_ami_id':'{{ get_base_ami.result }}', '':'{{app_ami_name}}','app_pkg_name':'{{app_package_name_loc}}','pkg_install_loc':'{{ package_install_loc }}', 'ec2_instance_type':'{{ec2_instance_type}}'}"
+        variables: "{'base_ami_id':'{{ get_base_ami.result }}', 'app_ami_name':'{{app_ami_name}}','app_pkg_name':'{{app_package_name_loc}}','pkg_install_loc':'{{ package_install_loc }}', 'ec2_instance_type':'{{ec2_instance_type}}'}"
       on-success: "get_app_ami"
     -
       name: "get_app_ami"
