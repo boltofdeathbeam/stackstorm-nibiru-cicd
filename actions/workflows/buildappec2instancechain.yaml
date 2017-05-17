@@ -43,4 +43,4 @@
       params:
         key: "{{app_ami_name}}-{{pipeline_id}}.instanceid"
         value: "{{create_ec2_instance.result[0]}}"
-  default: "get_ami_id_redis"
+  default: "get_ami_id_consul"

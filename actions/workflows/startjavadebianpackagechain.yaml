@@ -10,8 +10,8 @@
       name: "start_java_debian_package"
       ref: "nibiru_cicd.start_java_debian_package_action"
       params:
-        instanceip: "{{get_instance_ip_redis.result}}"
+        instanceip: "{{get_instance_ip_consul.result}}"
         packagename: "{{packagename}}"
         servicename: "{{servicename}}"
         key_file_name: "{{key_file_name}}"
-  default: "get_instance_ip_redis"
+  default: "get_instance_ip_consul"
