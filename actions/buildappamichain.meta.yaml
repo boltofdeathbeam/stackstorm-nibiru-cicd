@@ -21,7 +21,7 @@
     package_install_loc:
       type: "string"
       required: true
-    app_ami_name:
+    ami_app_name:
       type: "string"
       required: true
     ec2_instance_type:
