@@ -4,7 +4,7 @@
       name: "get_ami_id_consul"
       ref: "consul.get"
       params:
-        key: "{{ami_app_name}}-{{pipeline_id}}.amiid"
+        key: "{{app_ami_name}}-{{pipeline_id}}.amiid"
       on-success: "create_ec2_instance"
     -
       name: "create_ec2_instance"
