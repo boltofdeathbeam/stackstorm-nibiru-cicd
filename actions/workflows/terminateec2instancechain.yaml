@@ -10,5 +10,5 @@
       name: "terminate_ec2_instance"
       ref: "aws.ec2_terminate_instances"
       params:
-        instance_ids: ["{{get_instance_id_consul.result.Value}}"]
+        instance_ids: "{{get_instance_id_consul.result.Value}}"
   default: "get_instance_id_consul"
