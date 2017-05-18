@@ -1,6 +1,6 @@
 ---
 
-  name: "terminateec2intancechain"
+  name: "terminateec2instancechain"
   description: "Terminate EC2 Instance"
 
   runner_type: "action-chain"
