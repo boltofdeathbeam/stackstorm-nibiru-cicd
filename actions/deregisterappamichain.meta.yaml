@@ -1,0 +1,17 @@
+---
+
+  name: "deregisterappamichain"
+  description: "Deregister App AMI"
+
+  runner_type: "action-chain"
+
+  entry_point: "workflows/deregisterappamichain.yaml"
+
+  enabled: true
+  parameters:
+    app_ami_name:
+      type: "string"
+      required: true
+    pipeline_id:
+      type: "string"
+      required: true

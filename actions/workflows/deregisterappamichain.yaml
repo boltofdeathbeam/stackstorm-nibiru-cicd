@@ -1,0 +1,15 @@
+---
+  chain:
+    -
+      name: "get_ami_id_consul"
+      ref: "consul.get"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.amiid"
+      on-success: "deregister_app_ami"
+    -
+      name: "deregister_app_ami"
+      ref: "aws.ec2_deregister_image"
+      params:
+        amiid: "{{ get_ami_id_consul.result.Value }}"
+
+  default: "get_ami_id_consul"

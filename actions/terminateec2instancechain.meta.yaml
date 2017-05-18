@@ -1,0 +1,17 @@
+---
+
+  name: "terminateec2intancechain"
+  description: "Terminate EC2 Instance"
+
+  runner_type: "action-chain"
+
+  entry_point: "workflows/terminateec2instancechain.yaml"
+
+  enabled: true
+  parameters:
+    app_ami_name:
+      type: "string"
+      required: true
+    pipeline_id:
+      type: "string"
+      required: true
