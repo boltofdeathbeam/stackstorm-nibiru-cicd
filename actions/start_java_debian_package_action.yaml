@@ -5,23 +5,28 @@ description: "Start the java service from the installed debian package"
 enabled: true
 entry_point: "startjavadebianpackage.py"
 parameters:
+    instanceid:
+      type: "string"
+      description: "Instance ID"
+      required: true
+      position: 0
     instanceip:
         type: "string"
         description: "Instance IP"
         required: true
-        position: 0
+        position: 1
     packagename:
         type: "string"
         description: "Name of the debian package file"
         required: true
-        position: 1
+        position: 2
     servicename:
       type: "string"
       description: "Name of the service to start"
       required: true
-      position: 2
+      position: 3
     key_file_name:
       type: "string"
       description: "Key fie pem file for ssh connection"
       required: true
-      position: 3
+      position: 4
