@@ -6,7 +6,7 @@ import time
 from st2actions.runners.pythonrunner import Action
 
 class StartJavaDebianPackageAction(Action):
-    def run(self, instanceip, packagename, servicename, key_file_name):
+    def run(self, instanceid, instanceip, packagename, servicename, key_file_name):
 
         client = boto3.client('ec2')
         #Ensure instance is in a ready state, call ec2.describe_instance_status and ensure status is 16/running
