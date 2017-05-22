@@ -5,6 +5,12 @@
       ref: "consul.get"
       params:
         key: "{{app_ami_name}}-{{pipeline_id}}.instanceip"
+      on-success: "get_instance_id_consul"
+    -
+      name: "get_instance_id_consul"
+      ref: "consul.get"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceid"
       on-success: "start_java_debian_package"
     -
       name: "start_java_debian_package"
