@@ -9,28 +9,21 @@ class StartJavaDebianPackageAction(Action):
     def run(self, instanceip, packagename, servicename, key_file_name):
 
         #Ensure instance is in a ready state, call ec2.describe_instance_status and ensure status is 16/running
-        time.sleep(90)
+        code = 0
+        maxRetries = 10 #five minutes
+        numAttempts = 0
+        while ((code != 16) and (numAttempts != maxRetries)):
+            reservations = client.describe_instances(InstanceIds=[instanceid])
+            for res in reservations["Reservations"]:
+                for instance in res["Instances"]:
+                    code = instance["State"]["Code"]
 
-        # Get the instance id
-        # with open(instancefile) as data_file:
-        #     data = json.load(data_file)
+            if code != 16:
+                numAttempts += 1
+                time.sleep(30)
 
-        # instanceId = data["InstanceId"]
-
-        # Get the instance IP address
-        # client = boto3.client('ec2')
-        #
-        # reservations = client.describe_instances(InstanceIds=[instanceid])
-        # appIpAddress = ""
-        #
-        # for res in reservations["Reservations"]:
-        #     for instance in res["Instances"]:
-        #         appIpAddress = instance["PublicIpAddress"]
-        #         break
-        #
-        # print(appIpAddress)
-
-        #Save ip address to redis
+        if((code != 16) and (numAttempts == maxRetries)):
+            print("EC2 Instance timed out")
 
         #Connect to the instance and start app
         ssh = paramiko.SSHClient()
