@@ -11,4 +11,16 @@
       ref: "aws.ec2_terminate_instances"
       params:
         instance_ids: "{{get_instance_id_consul.result.Value}}"
+      on-success: "delete_instance_id_consul"
+    -
+      name: "delete_instance_id_consul"
+      ref: "consul.delete"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceid"
+      on-success: "delete_instance_ip_consul"
+    -
+      name: "delete_instance_ip_consul"
+      ref: "consul.delete"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceip"
   default: "get_instance_id_consul"

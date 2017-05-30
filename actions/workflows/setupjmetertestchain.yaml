@@ -1,0 +1,15 @@
+---
+  chain:
+    -
+      name: "get_instance_ip_consul"
+      ref: "consul.get"
+      params:
+        key: "{{app_ami_name}}-{{pipeline_id}}.instanceip"
+      on-success: "setup_jmeter_test"
+    -
+      name: "setup_jmeter_test"
+      ref: "nibiru_cicd.setup_jmeter_test_action"
+      params:
+        instance_ip: "{{get_instance_ip_consul.result.Value}}"
+        jmeter_file: "{{jmeter_file}}"
+  default: "get_instance_ip_consul"

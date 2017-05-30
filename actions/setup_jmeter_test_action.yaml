@@ -1,0 +1,17 @@
+---
+name: "setup_jmeter_test_action"
+runner_type: "python-script"
+description: "Setup the JMeter test file with the instance ip"
+enabled: true
+entry_point: "setupjmetertest.py"
+parameters:
+    instance_ip:
+        type: "string"
+        description: "IP Address of the instance"
+        required: true
+        position: 0
+    jmeter_file:
+        type: "string"
+        description: "JMeter jmx test file"
+        required: true
+        position: 1

@@ -16,6 +16,7 @@
         key_name: "{{key_name}}"
         app_instance_name: "{{app_instance_name}}"
       on-success: "set_instance_id_redis"
+      on-failure: "deregister_app_ami"
     -
       name: "set_instance_id_redis"
       ref: "redis.set"
@@ -43,4 +44,9 @@
       params:
         key: "{{app_ami_name}}-{{pipeline_id}}.instanceid"
         value: "{{create_ec2_instance.result[0]}}"
+    -
+      name: "deregister_app_ami"
+      ref: "aws.ec2_deregister_image"
+      params:
+        image_id: "{{get_ami_id_consul.result.Value}}"
   default: "get_ami_id_consul"
