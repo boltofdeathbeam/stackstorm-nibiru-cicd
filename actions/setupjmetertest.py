@@ -1,4 +1,5 @@
 import sys
+from xml.etree import ElementTree as et
 
 from st2actions.runners.pythonrunner import Action
 
