@@ -27,7 +27,7 @@ class StartJavaDebianPackageAction(Action):
             print("EC2 Instance timed out")
 
         #Once instance is running wait for port 22 to be activated
-        time.sleep(30)
+        time.sleep(10)
 
         #Connect to the instance and start app
         ssh = paramiko.SSHClient()
