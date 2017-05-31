@@ -30,3 +30,6 @@
     pipeline_id:
       type: "string"
       required: true
+    packer_timeout:
+      type: "integer"
+      required: true
