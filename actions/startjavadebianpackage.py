@@ -35,7 +35,7 @@ class StartJavaDebianPackageAction(Action):
         retries = 3
         i = 0
         connected = False
-        while ((i<retries) && (!connected)):
+        while ((i<retries) and (!connected)):
             try:
                 ssh.connect(instanceip, username = 'ubuntu', key_filename=key_file_name
                 connected = True
