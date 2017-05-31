@@ -34,10 +34,11 @@ class StartJavaDebianPackageAction(Action):
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
         retries = 3
         i = 0
-        while (i<retries):
+        connected = False
+        while ((i<retries) && (!connected)):
             try:
                 ssh.connect(instanceip, username = 'ubuntu', key_filename=key_file_name
-                break
+                connected = True
             except (SSHException):
                 sleep(10)
                 i += 1
