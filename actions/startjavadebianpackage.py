@@ -39,7 +39,7 @@ class StartJavaDebianPackageAction(Action):
             try:
                 ssh.connect(instanceip, username = 'ubuntu', key_filename=key_file_name)
                 connected = True
-            except (SSHException):
+            except (paramiko.SSHException):
                 sleep(10)
                 i += 1
         print "Connected to server."
