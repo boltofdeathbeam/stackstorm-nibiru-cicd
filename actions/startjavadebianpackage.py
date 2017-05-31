@@ -32,7 +32,15 @@ class StartJavaDebianPackageAction(Action):
         #Connect to the instance and start app
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
-        ssh.connect(instanceip, username = 'ubuntu', key_filename=key_file_name)
+        retries = 3
+        i = 0
+        while (i<retries):
+            try:
+                ssh.connect(instanceip, username = 'ubuntu', key_filename=key_file_name
+                break
+            except (SSHException):
+                sleep(10)
+                i += 1
         print "Connected to server."
         dpkgcommand = 'sudo dpkg -i ' + packagename
         stdin, stdout, stderr = ssh.exec_command(dpkgcommand)
